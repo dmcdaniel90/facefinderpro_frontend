@@ -1,6 +1,7 @@
 body {
   margin: 0;
   padding: 0;
+  height: auto;
   font-family: "Courier New", Courier, monospace;
   background: #009FFF;  /* fallback for old browsers */
   background: -webkit-linear-gradient(to right, #ec2F4B, #009FFF);  /* Chrome 10-25, Safari 5.1-6 */
