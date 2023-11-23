@@ -9,23 +9,50 @@ import Register from './components/Register/Register';
 import ParticlesBg from 'particles-bg'; 
 import './App.css';
 
+const userSession = sessionStorage.getItem('user');
+
 const particlesOptions = {
   num: 10,
   type: 'circle',
   bg: true
 }
-class App extends Component {
 
+const initialState = {
+  input: '',
+  imageURL: '',
+  boundingBox: {},
+  route: userSession ? 'home' : 'signin',
+  isSignedIn: userSession ? true : false,
+  user: userSession
+    ? JSON.parse(userSession)
+    : {
+        id: '',
+        name: '',
+        email: '',
+        entries: 0,
+        joined: ''
+      }
+};
+
+class App extends Component {
   constructor() {
     super();
-    this.state = {
-      input: '',
-      imageURL: '',
-      boundingBox: {},
-      route: 'signin',
-      isSignedIn: false
-    }
+    this.state = initialState;
   }
+
+  loadUser = (data) => {
+    this.setState({
+      user: {
+        id: data.id,
+        name: data.name,
+        email: data.email,
+        entries: data.entries,
+        joined: data.joined
+      }
+    });
+    sessionStorage.setItem('user', JSON.stringify(data));
+  };
+
 
   onInputChange = (event) => {
     this.setState({input: event.target.value});
@@ -35,6 +62,20 @@ class App extends Component {
     this.setState({ imageURL: this.state.input });
     this.getClarifaiRequestOptions(this.state.input);
   };
+
+  //on page refresh, update the user session with the latest user data from the database
+  componentDidMount() {
+    if (this.state.isSignedIn) {
+      fetch(`http://localhost:3000/profile/${this.state.user.id}`)
+        .then(response => response.json())
+        .then(user => {
+          if (user && user.id) {
+            this.loadUser(user);
+          }
+        })
+        .catch(console.log);
+    }
+  }
 
   getClarifaiRequestOptions = (imageURL) => {
   // Your PAT (Personal Access Token) can be found in the portal under Authentification
@@ -78,9 +119,25 @@ class App extends Component {
 
   fetch("https://api.clarifai.com/v2/models/" + MODEL_ID + "/outputs", requestOptions)
     .then(response => response.json())
-    .then(result => this.renderFaceBox(this.calculateFaceLocation(result)))
+    .then(result => {
+      this.renderFaceBox(this.calculateFaceLocation(result))
+
+      return fetch('http://localhost:3000/image', {
+        method: 'put',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          id: this.state.user.id
+        })
+      })
+      .then(response => response.json())
+      .then(count => {
+        this.setState(Object.assign(this.state.user, { entries: count }))
+      })
+      .catch(err => console.log(err))
+    })
     .catch(error => console.log('error', error));
   }
+
 
   calculateFaceLocation = (data) => {
     const clarifaiFace = data.outputs[0].data.regions[0].region_info.bounding_box
@@ -102,9 +159,10 @@ class App extends Component {
 
   onRouteChange = (route) => {
     if (route === 'signout') {
-      this.setState({isSignedIn: false})
+      this.setState(initialState)
+      sessionStorage.removeItem('user');
     } else if (route === 'home') {
-      this.setState({isSignedIn: true})
+      this.setState({ isSignedIn: true })
     }
     
     this.setState({ route: route });
@@ -121,7 +179,7 @@ class App extends Component {
         {route === 'home'
         ? <div>
             <Logo />
-            <Rank />
+            <Rank name={this.state.user.name} entries={this.state.user.entries} />
             <ImageLinkForm
               onInputChange={this.onInputChange}
               onButtonSubmit={this.onButtonSubmit}
@@ -130,11 +188,9 @@ class App extends Component {
           </div>
           : (
             route === 'signin' || route === 'signout'
-              ? <Signin onRouteChange={this.onRouteChange}/>
-              : <Register onRouteChange={this.onRouteChange} />
+              ? <Signin loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>
+              : <Register loadUser={this.loadUser} onRouteChange={this.onRouteChange} />
           )
-           
-        
         }
       </div>
     )
