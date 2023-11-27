@@ -9,8 +9,6 @@ import Register from './components/Register/Register';
 import ParticlesBg from 'particles-bg'; 
 import './App.css';
 
-//const userSession = sessionStorage.getItem('user');
-
 const particlesOptions = {
   num: 10,
   type: 'circle',
@@ -40,13 +38,16 @@ class App extends Component {
   }
 
   loadUser = (data) => {
-    this.setState({user: {
-      id: data.id,
-      name: data.name,
-      email: data.email,
-      entries: data.entries,
-      joined: data.joined
-    }})
+    this.setState({
+      user: {
+        id: data.id,
+        name: data.name,
+        email: data.email,
+        entries: data.entries,
+        joined: data.joined
+      },
+      imageUrl: ''
+    })
   }
 
   calculateFaceLocation = (data) => {
@@ -112,7 +113,7 @@ class App extends Component {
     if (route === 'signout') {
       this.setState(initialState)
     } else if (route === 'home') {
-      this.setState({isSignedIn: true})
+      this.setState({ isSignedIn: true })
     }
     this.setState({route: route});
   }
