@@ -46,7 +46,8 @@ class App extends Component {
         entries: data.entries,
         joined: data.joined
       },
-      imageUrl: ''
+      imageUrl: '',
+      route: 'home'
     })
   }
 

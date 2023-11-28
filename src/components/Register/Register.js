@@ -7,8 +7,8 @@ class Register extends React.Component {
     this.state = {
       email: '',
       password: '',
-      name: '',
-      errorStatus: '' //todo  create a modal showing the error, if any. Use conditional rendering. 
+      name: ''
+      // errorStatus: '' //todo  create a modal showing the error, if any. Use conditional rendering. 
     }
   }
 
@@ -40,9 +40,10 @@ class Register extends React.Component {
           console.log(error);
         })
       }
-      return response.json();
+      return response.json()
     })
     .then(user => {
+      console.log(user);
       if (user.id) {
         this.props.loadUser(user)
         this.props.onRouteChange('home')
@@ -52,7 +53,7 @@ class Register extends React.Component {
   }
 
   render() {
-    const { onSubmitSignIn, onNameChange, onEmailChange, onPasswordChange } = this.props
+    //const { onSubmitSignIn, onNameChange, onEmailChange, onPasswordChange } = this.props
     
     return (
       <article className="br3 ba dark-gray b--white-10 mv4 w-100 w-50-m w-25-l mw6 shadow-5 center">
@@ -66,10 +67,10 @@ class Register extends React.Component {
                 <label className="db fw6 lh-copy f6" htmlFor="name">Name</label>
                 <input
                   className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
-                  type="email"
+                  type="text"
                   name="name"
                   id="name"
-                  onChange={onNameChange}
+                  onChange={this.onNameChange}
                 />
               </div>
               <div className="mt3">
@@ -79,7 +80,7 @@ class Register extends React.Component {
                   type="email"
                   name="email-address"
                   id="email-address"
-                  onChange={onEmailChange}
+                  onChange={this.onEmailChange}
                 />
               </div>
               <div className="mv3">
@@ -89,7 +90,7 @@ class Register extends React.Component {
                   type="password"
                   name="password"
                   id="password"
-                  onChange={onPasswordChange}
+                  onChange={this.onPasswordChange}
                 />
               </div>
             
@@ -99,7 +100,7 @@ class Register extends React.Component {
                 className="b ph3 pv2 input-reset ba b--white white bg-transparent grow pointer f6 dib"
                 type="submit"
                 value="Register"
-                onClick={onSubmitSignIn}
+                onClick={this.onSubmitSignIn}
               />
             </div>
           </form>
