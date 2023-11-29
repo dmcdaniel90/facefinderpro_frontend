@@ -74,7 +74,7 @@ class App extends Component {
 
   onButtonSubmit = () => {
     this.setState({imageUrl: this.state.input});
-      fetch('http://localhost:3000/imageurl', {
+      fetch('https://pure-chamber-68409-b6d4e0cc53bb.herokuapp.com/imageurl', {
         method: 'post',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({
@@ -84,8 +84,7 @@ class App extends Component {
       .then(response => response.json())
       .then(response => {
         if (response) {
-          console.log(response);
-          fetch('http://localhost:3000/image', {
+          fetch('https://pure-chamber-68409-b6d4e0cc53bb.herokuapp.com/image', {
             method: 'put',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
@@ -94,7 +93,6 @@ class App extends Component {
           })
             .then(response => response.json())
             .then(response => {
-              console.log(response);
               this.setState(prevState => ({
                 user: {
                   ...prevState.user,
@@ -102,7 +100,7 @@ class App extends Component {
                 }
               }))
             })
-            .catch(console.log)
+            .catch(err => console.log(err))
 
         }
         this.displayFaceBox(this.calculateFaceLocation(response))

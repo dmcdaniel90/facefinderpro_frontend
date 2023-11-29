@@ -25,7 +25,7 @@ class Register extends React.Component {
   onSubmitSignIn = (e) => {
     e.preventDefault();
 
-    fetch('http://localhost:3000/register', {
+    fetch('https://pure-chamber-68409-b6d4e0cc53bb.herokuapp.com/register', {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -43,7 +43,6 @@ class Register extends React.Component {
       return response.json()
     })
     .then(user => {
-      console.log(user);
       if (user.id) {
         this.props.loadUser(user)
         this.props.onRouteChange('home')
