@@ -1,6 +1,9 @@
 import React from "react";
+import { useStore } from "../../store";
 
-const Rank = ({ name, entries }) => {
+const Rank = () => {
+  const { name, entries } = useStore((state) => state.user);
+
   return (
     <div>
       <div className="white f3">

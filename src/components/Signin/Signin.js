@@ -6,6 +6,7 @@ export default function Signin() {
   const [signInPassword, setSignInPassword] = useState("");
   const setRoute = useStore((state) => state.setRoute);
   const setUser = useStore((state) => state.setUser);
+  const setIsSignedIn = useStore((state) => state.setIsSignedIn);
 
   const onEmailChange = (event) => {
     setSignInEmail(event.target.value);
@@ -30,6 +31,7 @@ export default function Signin() {
       .then((user) => {
         if (user.id) {
           setUser(user);
+          setIsSignedIn(true);
           setRoute("home");
         }
       })

@@ -1,7 +1,38 @@
 import React from "react";
+import { useStore } from "../../store";
+import { calculateFaceLocation } from "../../utils/calculateFaceLocation";
+import getData from "../../utils/getData";
 import "./ImageLinkForm.css";
 
-const ImageLinkForm = ({ onInputChange, onButtonSubmit }) => {
+const ImageLinkForm = () => {
+  const input = useStore((state) => state.input);
+  const setInput = useStore((state) => state.setInput);
+  const setImageUrl = useStore((state) => state.setImageUrl);
+  const setBoundingBox = useStore((state) => state.setBoundingBox);
+  const user = useStore((state) => state.user);
+  const setUserEntries = useStore((state) => state.setUserEntries);
+
+  const displayFaceBox = (boundingBox) => {
+    setBoundingBox(boundingBox);
+  };
+
+  const onInputChange = (event) => {
+    setInput(event.target.value);
+  };
+
+  const getDataArgs = {
+    input,
+    setImageUrl,
+    displayFaceBox,
+    calculateFaceLocation,
+    user,
+    setUserEntries,
+  };
+
+  const onButtonSubmit = () => {
+    getData(getDataArgs);
+  };
+
   return (
     <div>
       <p className="f3">

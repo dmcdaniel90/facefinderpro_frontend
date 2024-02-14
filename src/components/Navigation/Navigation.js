@@ -1,20 +1,21 @@
-import { useEffect } from "react";
 import { useStore } from "../../store";
 
 const Navigation = () => {
   const isSignedIn = useStore((state) => state.isSignedIn);
-  const onRouteChange = useStore((state) => state.setRoute);
+  const setRoute = useStore((state) => state.setRoute);
+  const logout = useStore((state) => state.logout);
 
-  useEffect(() => {
-    console.log("isSignedIn: ", isSignedIn);
-  }, [isSignedIn]);
+  const handleSignout = () => {
+    logout();
+    setRoute("signout");
+  };
 
   if (isSignedIn) {
     return (
       <nav style={{ display: "flex", justifyContent: "flex-end" }}>
         <p
           className="f3 b link dim white underline pa3 pointer"
-          onClick={() => onRouteChange("signout")}
+          onClick={handleSignout}
         >
           Sign Out
         </p>
@@ -26,13 +27,13 @@ const Navigation = () => {
         <nav style={{ display: "flex", justifyContent: "flex-end" }}>
           <p
             className="f3 b link dim white underline pa3 pointer"
-            onClick={() => onRouteChange("signin")}
+            onClick={() => setRoute("signin")}
           >
             Sign In
           </p>
           <p
             className="f3 b link dim white underline pa3 pointer"
-            onClick={() => onRouteChange("register")}
+            onClick={() => setRoute("register")}
           >
             Register
           </p>

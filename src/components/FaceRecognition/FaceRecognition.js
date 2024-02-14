@@ -1,7 +1,11 @@
 import React from "react";
+import { useStore } from "../../store";
 import "./FaceRecognition.css";
 
-const FaceRecognition = ({ imageURL, boundingBox }) => {
+const FaceRecognition = () => {
+  const imageURL = useStore((state) => state.imageUrl);
+  const boundingBox = useStore((state) => state.boundingBox);
+
   return (
     <div className="center ma">
       <div className="absolute mt2">
