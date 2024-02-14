@@ -1,5 +1,7 @@
 //import React, { Component } from 'react';
 import { useState } from "react";
+import { useStore } from "./store";
+import { produce } from "immer";
 import Navigation from "./components/Navigation/Navigation";
 import Logo from "./components/Logo/Logo";
 import ImageLinkForm from "./components/ImageLinkForm/ImageLinkForm";
@@ -32,7 +34,9 @@ const initialState = {
 };
 
 export default function App() {
-  const [input, setInput] = useState("");
+  const input = useStore((state) => state.input);
+  const setInput = useStore((state) => state.setInput);
+
   const [imageUrl, setImageUrl] = useState("");
   const [boundingBox, setBoundingBox] = useState({});
   const [route, setRoute] = useState("signin");
@@ -47,6 +51,15 @@ export default function App() {
       entries: data.entries,
       joined: data.joined,
     });
+  };
+
+  const logout = () => {
+    setUser({ ...initialState.user });
+    setBoundingBox(initialState.boundingBox);
+    setImageUrl(initialState.imageUrl);
+    setInput(initialState.input);
+    setIsSignedIn(initialState.isSignedIn);
+    setRoute(initialState.route);
   };
 
   const calculateFaceLocation = (data) => {
@@ -70,7 +83,10 @@ export default function App() {
     setInput(event.target.value);
   };
 
-  const onButtonSubmit = () => {
+  /**============================================
+   **               Promises Fetch
+   *=============================================**/
+  const onButtonSubmit = async () => {
     setImageUrl(input);
     fetch("http://localhost:3000/imageurl", {
       //! Change this to your server's URL: 'https://pure-chamber-68409-b6d4e0cc53bb.herokuapp.com/imageurl'
@@ -94,13 +110,11 @@ export default function App() {
           })
             .then((response) => response.json())
             .then((response) => {
-              setUser((prevState) => ({
-                ...prevState,
-                user: {
-                  ...prevState.user,
-                  entries: response.entries,
-                },
-              }));
+              setUser(
+                produce((state) => {
+                  state.entries = response.entries;
+                }),
+              );
             })
             .catch((err) => console.log(err));
         }
@@ -111,12 +125,7 @@ export default function App() {
 
   const onRouteChange = (route) => {
     if (route === "signout") {
-      setUser(initialState.user);
-      setBoundingBox(initialState.boundingBox);
-      setImageUrl(initialState.imageUrl);
-      setInput(initialState.input);
-      setIsSignedIn(initialState.isSignedIn);
-      setRoute(initialState.route);
+      logout();
     } else if (route === "home") {
       setIsSignedIn(true);
     }
