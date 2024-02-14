@@ -18,49 +18,36 @@ const particlesOptions = {
   bg: true,
 };
 
-const initialState = {
-  input: "",
-  imageUrl: "",
-  boundingBox: {},
-  route: "signin",
-  isSignedIn: false,
-  user: {
-    id: "",
-    name: "",
-    email: "",
-    entries: 0,
-    joined: "",
-  },
-};
+// const initialState = {
+//   input: "",
+//   imageUrl: "",
+//   boundingBox: {},
+//   route: "signin",
+//   isSignedIn: false,
+//   user: {
+//     id: "",
+//     name: "",
+//     email: "",
+//     entries: 0,
+//     joined: "",
+//   },
+// };
 
 export default function App() {
   const input = useStore((state) => state.input);
   const setInput = useStore((state) => state.setInput);
-
-  const [imageUrl, setImageUrl] = useState("");
-  const [boundingBox, setBoundingBox] = useState({});
-  const [route, setRoute] = useState("signin");
-  const [isSignedIn, setIsSignedIn] = useState(false);
-  const [user, setUser] = useState({ ...initialState.user });
-
-  const loadUser = (data) => {
-    setUser({
-      id: data.id,
-      name: data.name,
-      email: data.email,
-      entries: data.entries,
-      joined: data.joined,
-    });
-  };
-
-  const logout = () => {
-    setUser({ ...initialState.user });
-    setBoundingBox(initialState.boundingBox);
-    setImageUrl(initialState.imageUrl);
-    setInput(initialState.input);
-    setIsSignedIn(initialState.isSignedIn);
-    setRoute(initialState.route);
-  };
+  const imageUrl = useStore((state) => state.imageUrl);
+  const setImageUrl = useStore((state) => state.setImageUrl);
+  const boundingBox = useStore((state) => state.boundingBox);
+  const setBoundingBox = useStore((state) => state.setBoundingBox);
+  const route = useStore((state) => state.route);
+  const setRoute = useStore((state) => state.setRoute);
+  const isSignedIn = useStore((state) => state.isSignedIn);
+  const setIsSignedIn = useStore((state) => state.setIsSignedIn);
+  const user = useStore((state) => state.user);
+  const setUser = useStore((state) => state.setUser);
+  const setUserEntries = useStore((state) => state.setUserEntries);
+  const logout = useStore((state) => state.logout);
 
   const calculateFaceLocation = (data) => {
     const clarifaiFace = data;
@@ -110,11 +97,8 @@ export default function App() {
           })
             .then((response) => response.json())
             .then((response) => {
-              setUser(
-                produce((state) => {
-                  state.entries = response.entries;
-                }),
-              );
+              console.log(response);
+              setUserEntries(response);
             })
             .catch((err) => console.log(err));
         }
@@ -135,7 +119,7 @@ export default function App() {
   return (
     <div className="App">
       <ParticlesBg {...particlesOptions} />
-      <Navigation onRouteChange={onRouteChange} isSignedIn={isSignedIn} />
+      <Navigation />
       {route === "home" ? (
         <div>
           <Logo />
@@ -147,9 +131,9 @@ export default function App() {
           <FaceRecogniton imageURL={imageUrl} boundingBox={boundingBox} />
         </div>
       ) : route === "signin" || route === "signout" ? (
-        <Signin loadUser={loadUser} onRouteChange={onRouteChange} />
+        <Signin />
       ) : (
-        <Register loadUser={loadUser} onRouteChange={onRouteChange} />
+        <Register loadUser={setUser} onRouteChange={onRouteChange} />
       )}
     </div>
   );

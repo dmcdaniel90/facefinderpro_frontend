@@ -1,6 +1,14 @@
-import React from "react";
+import { useEffect } from "react";
+import { useStore } from "../../store";
 
-const Navigation = ({ onRouteChange, isSignedIn }) => {
+const Navigation = () => {
+  const isSignedIn = useStore((state) => state.isSignedIn);
+  const onRouteChange = useStore((state) => state.setRoute);
+
+  useEffect(() => {
+    console.log("isSignedIn: ", isSignedIn);
+  }, [isSignedIn]);
+
   if (isSignedIn) {
     return (
       <nav style={{ display: "flex", justifyContent: "flex-end" }}>
