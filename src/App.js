@@ -74,7 +74,7 @@ class App extends Component {
 
   onButtonSubmit = () => {
     this.setState({imageUrl: this.state.input});
-      fetch('https://pure-chamber-68409-b6d4e0cc53bb.herokuapp.com/imageurl', {
+      fetch('http://localhost:3000/imageurl', { //! Change this to your server's URL: 'https://pure-chamber-68409-b6d4e0cc53bb.herokuapp.com/imageurl' 
         method: 'post',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({
@@ -84,7 +84,8 @@ class App extends Component {
       .then(response => response.json())
       .then(response => {
         if (response) {
-          fetch('https://pure-chamber-68409-b6d4e0cc53bb.herokuapp.com/image', {
+          fetch('http://localhost:3000/image', { //! Change this to your server's URL: 'https://pure-chamber-68409-b6d4e0cc53bb.herokuapp.com/image'
+
             method: 'put',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
