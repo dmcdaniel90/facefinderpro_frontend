@@ -2,8 +2,8 @@ export default async function getData(args) {
   const {
     input,
     setImageUrl,
-    displayFaceBox,
-    calculateFaceLocation,
+    displayFaceBoxes,
+    calculateFaceLocations,
     user,
     setUserEntries,
   } = args;
@@ -35,7 +35,7 @@ export default async function getData(args) {
           })
           .catch((err) => console.log(err));
       }
-      displayFaceBox(calculateFaceLocation(response));
+      displayFaceBoxes(calculateFaceLocations(response));
     })
     .catch((err) => console.log(err));
 }

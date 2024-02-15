@@ -1,6 +1,6 @@
 import React from "react";
 import { useStore } from "../../store";
-import { calculateFaceLocation } from "../../utils/calculateFaceLocation";
+import { calculateFaceLocations } from "../../utils/calculateFaceLocation";
 import getData from "../../utils/getData";
 import "./ImageLinkForm.css";
 
@@ -8,12 +8,12 @@ const ImageLinkForm = () => {
   const input = useStore((state) => state.input);
   const setInput = useStore((state) => state.setInput);
   const setImageUrl = useStore((state) => state.setImageUrl);
-  const setBoundingBox = useStore((state) => state.setBoundingBox);
+  const setBoundingBoxes = useStore((state) => state.setBoundingBoxes);
   const user = useStore((state) => state.user);
   const setUserEntries = useStore((state) => state.setUserEntries);
 
-  const displayFaceBox = (boundingBox) => {
-    setBoundingBox(boundingBox);
+  const displayFaceBoxes = (boundingBoxes) => {
+    setBoundingBoxes(boundingBoxes);
   };
 
   const onInputChange = (event) => {
@@ -23,8 +23,8 @@ const ImageLinkForm = () => {
   const getDataArgs = {
     input,
     setImageUrl,
-    displayFaceBox,
-    calculateFaceLocation,
+    displayFaceBoxes,
+    calculateFaceLocations,
     user,
     setUserEntries,
   };

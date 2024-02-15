@@ -1,11 +1,11 @@
-export const calculateFaceLocation = (data) => {
-  const clarifaiFace = data;
+export const calculateFaceLocations = (data) => {
+  const clarifaiFaces = data;
   const image = document.getElementById("inputImage");
   const width = Number(image.width);
   const height = Number(image.height);
   const mappedData = [];
 
-  clarifaiFace.map((face) => {
+  clarifaiFaces.map((face) => {
     mappedData.push({
       leftCol: face.left_col * width,
       topRow: face.top_row * height,

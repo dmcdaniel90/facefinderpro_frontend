@@ -3,9 +3,9 @@ import "./FaceRecognition.css";
 
 const FaceRecognition = () => {
   const imageURL = useStore((state) => state.imageUrl);
-  const boundingBox = useStore((state) => state.boundingBox);
+  const boundingBoxes = useStore((state) => state.boundingBoxes);
 
-  const faces = boundingBox.map((face, i) => {
+  const faces = boundingBoxes.map((face, i) => {
     return (
       <div
         key={i}

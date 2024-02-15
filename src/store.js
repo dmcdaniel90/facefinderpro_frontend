@@ -5,7 +5,7 @@ import { produce } from "immer";
 const initialState = {
   input: "",
   imageUrl: "",
-  boundingBox: [],
+  boundingBoxes: [],
   route: "signin",
   isSignedIn: false,
   user: {
@@ -22,7 +22,7 @@ export const useStore = create(
     ...initialState,
     setInput: (input) => set({ input }),
     setImageUrl: (imageUrl) => set({ imageUrl }),
-    setBoundingBox: (boundingBox) => set({ boundingBox }),
+    setBoundingBoxes: (boundingBoxes) => set({ boundingBoxes }),
     setRoute: (route) => set({ route }),
     setIsSignedIn: (isSignedIn) => set({ isSignedIn }),
 
