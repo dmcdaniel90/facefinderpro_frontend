@@ -5,7 +5,7 @@ import { produce } from "immer";
 const initialState = {
   input: "",
   imageUrl: "",
-  boundingBox: {},
+  boundingBox: [],
   route: "signin",
   isSignedIn: false,
   user: {

@@ -1,10 +1,24 @@
-import React from "react";
 import { useStore } from "../../store";
 import "./FaceRecognition.css";
 
 const FaceRecognition = () => {
   const imageURL = useStore((state) => state.imageUrl);
   const boundingBox = useStore((state) => state.boundingBox);
+
+  const faces = boundingBox.map((face, i) => {
+    return (
+      <div
+        key={i}
+        className="bounding-box"
+        style={{
+          top: face.topRow,
+          bottom: face.bottomRow,
+          left: face.leftCol,
+          right: face.rightCol,
+        }}
+      ></div>
+    );
+  });
 
   return (
     <div className="center ma">
@@ -16,15 +30,8 @@ const FaceRecognition = () => {
           width="500px"
           height="auto"
         />
-        <div
-          className="bounding-box"
-          style={{
-            top: boundingBox.topRow,
-            bottom: boundingBox.bottomRow,
-            left: boundingBox.leftCol,
-            right: boundingBox.rightCol,
-          }}
-        ></div>
+        {/* Render the bounding boxes for each face */}
+        {faces}
       </div>
     </div>
   );

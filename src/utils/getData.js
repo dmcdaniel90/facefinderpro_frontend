@@ -31,7 +31,6 @@ export default async function getData(args) {
         })
           .then((response) => response.json())
           .then((response) => {
-            console.log(response);
             setUserEntries(response);
           })
           .catch((err) => console.log(err));

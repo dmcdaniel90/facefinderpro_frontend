@@ -3,6 +3,6 @@ import App from "./App";
 
 test("renders App", () => {
   render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
+  const linkElement = screen.getByRole("group", { name: /Sign in/i });
   expect(linkElement).toBeInTheDocument();
 });

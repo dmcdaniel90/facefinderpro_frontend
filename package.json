@@ -19,12 +19,14 @@
   },
   "devDependencies": {
     "prettier": "^3.2.5",
-    "react-scripts": "5.0.1"
+    "react-scripts": "5.0.1",
+    "@babel/plugin-proposal-private-property-in-object": "^7.16.7"
   },
   "scripts": {
     "start": "serve -s build",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "restart": "npm run build && npm run start",
+    "test": "react-scripts test --detectOpenHandles",
     "eject": "react-scripts eject",
     "format": "prettier --write 'src/**/*.{js,jsx,ts,tsx,json,css,scss,md}'",
     "audit": "audit --omit='dev'"
