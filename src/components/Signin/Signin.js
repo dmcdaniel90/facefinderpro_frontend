@@ -18,8 +18,7 @@ export default function Signin() {
   const onSubmitSignIn = (e) => {
     e.preventDefault();
 
-    fetch("http://localhost:3000/signin", {
-      //! Change this to your server's URL: 'https://pure-chamber-68409-b6d4e0cc53bb.herokuapp.com/signin'
+    fetch("https://pure-chamber-68409-b6d4e0cc53bb.herokuapp.com/signin", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
