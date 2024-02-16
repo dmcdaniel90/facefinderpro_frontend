@@ -43,8 +43,8 @@ The API for this application is hosted in a separate repository. You can find it
 
 ## Screenshots
 
-![Login Page](public/smartbrain-login.jpeg)
-![Recognition Screen](public/smartbrain-recognition.jpeg)
+![Login Page](assets/images/smartbrain-login.jpeg)
+![Recognition Screen](assets/images/smartbrain-recognition.jpeg)
 
 ## Contributing
 
