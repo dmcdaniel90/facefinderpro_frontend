@@ -34,10 +34,17 @@ This project uses the following dependencies:
 - @testing-library/jest-dom: ^5.11.4
 - @testing-library/react: ^11.1.0
 - @testing-library/user-event: ^12.1.10
+- immer: ^10.0.3
+- zustand: ^4.5.0
 
 ## API Repository
 
 The API for this application is hosted in a separate repository. You can find it [here](https://github.com/dmcdaniel90/smartbrainapi).
+
+## Screenshots
+
+![Login Page](public/smartbrain-login.jpeg)
+![Recognition Screen](public/smartbrain-recognition.jpeg)
 
 ## Contributing
 
