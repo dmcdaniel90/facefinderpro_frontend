@@ -16,6 +16,7 @@ export default async function getData(args) {
     body: JSON.stringify({
       input: input,
     }),
+    mode: "no-cors",
   })
     .then((response) => response.json())
     .then((response) => {
