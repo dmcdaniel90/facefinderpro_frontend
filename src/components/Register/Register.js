@@ -36,8 +36,8 @@ export default function Register() {
       }),
       mode: "cors",
     })
-      .then((response) => {
-        const responseData = response.json();
+      .then(async (response) => {
+        const responseData = await response.json();
         console.log(responseData);
         if (!response.ok) {
           console.log(responseData);
