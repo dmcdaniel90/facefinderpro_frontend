@@ -24,7 +24,7 @@ export default function Register() {
     e.preventDefault();
 
     
-    fetch("https://facefinderpro-production.up.railway.app:8080/register", {
+    fetch("https://facefinderpro-production.up.railway.app/register", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
