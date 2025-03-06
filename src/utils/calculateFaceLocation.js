@@ -12,6 +12,8 @@ export const calculateFaceLocations = (data) => {
       rightCol: width - face.right_col * width,
       bottomRow: height - face.bottom_row * height,
     });
+
+    return null;
   });
 
   return mappedData;
