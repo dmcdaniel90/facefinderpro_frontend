@@ -18,7 +18,7 @@ export default function Signin() {
   const onSubmitSignIn = (e) => {
     e.preventDefault();
     
-    fetch("smartbrainapi.railway.internal/signin", {
+    fetch("facefinderpro-production.up.railway.app/signin", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
