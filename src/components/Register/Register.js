@@ -24,7 +24,7 @@ export default function Register() {
     e.preventDefault();
 
     
-    fetch("https://facefinderpro-production.up.railway.app/register", {
+    fetch("https://facefinderpro-production.up.railway.app:8080/register", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
@@ -40,7 +40,6 @@ export default function Register() {
         const responseData = await response.json();
         console.log(responseData);
         if (!response.ok) {
-          console.log(responseData);
           throw new Error(responseData.message || "Failed to authenticate!");
         }
         return response.json();
