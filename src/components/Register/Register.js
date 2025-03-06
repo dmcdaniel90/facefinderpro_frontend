@@ -26,15 +26,18 @@ export default function Register() {
     
     fetch("https://facefinderpro-production.up.railway.app/register", {
       method: "post",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({
         name,
         email,
         password,
       }),
     })
-      .then(async (response) => {
-        const responseData = await response.json();
+      .then((response) => {
+        const responseData = response.json();
+        console.log(responseData);
         if (!response.ok) {
           console.log(responseData);
           throw new Error(responseData.message || "Failed to authenticate!");
