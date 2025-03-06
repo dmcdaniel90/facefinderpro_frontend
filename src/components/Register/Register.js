@@ -34,9 +34,10 @@ export default function Register() {
       }),
     })
       .then(async (response) => {
+        const responseData = await response.json();
         if (!response.ok) {
-          const error = await response.json();
-          console.log(error);
+          console.log(responseData);
+          throw new Error(responseData.message || "Failed to authenticate!");
         }
         return response.json();
       })
