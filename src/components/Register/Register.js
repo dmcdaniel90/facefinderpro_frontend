@@ -36,8 +36,8 @@ export default function Register() {
       }),
       mode: "cors",
     })
-      .then(async (response) => {
-        const responseData = await response.json();
+      .then((response) => {
+        const responseData = response.json();
         console.log(responseData);
         if (!response.ok) {
           throw new Error(responseData.message || "Failed to authenticate!");
