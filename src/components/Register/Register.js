@@ -34,6 +34,7 @@ export default function Register() {
         email,
         password,
       }),
+      mode: "no-cors",
     })
       .then((response) => {
         const responseData = response.json();
