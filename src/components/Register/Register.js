@@ -33,11 +33,10 @@ export default function Register() {
         password,
       }),
     })
-      .then((response) => {
+      .then(async (response) => {
         if (!response.ok) {
-          return response.json().then((error) => {
-            console.log(error);
-          });
+          const error = await response.json();
+          console.log(error);
         }
         return response.json();
       })
