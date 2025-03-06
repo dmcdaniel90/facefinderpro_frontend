@@ -9,8 +9,8 @@ export default async function getData(args) {
   } = args;
 
   setImageUrl(input);
-  // TODO Change this Netlify
-  fetch("https://localhost:3000/imageurl", {
+  
+  fetch("smartbrainapi.railway.internal/imageurl", {
     method: "post",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -20,8 +20,8 @@ export default async function getData(args) {
     .then((response) => response.json())
     .then((response) => {
       if (response) {
-        // TODO Change this Netlify
-        fetch("https://localhost:3000/image", {
+        
+        fetch("smartbrainapi.railway.internal/image", {
           method: "put",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({

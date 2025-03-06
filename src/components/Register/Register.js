@@ -23,8 +23,8 @@ export default function Register() {
   const onSubmitSignIn = (e) => {
     e.preventDefault();
 
-    // TODO Change this Netlify
-    fetch("https://localhost:3000/signin", {
+    
+    fetch("smartbrainapi.railway.internal/signin", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
