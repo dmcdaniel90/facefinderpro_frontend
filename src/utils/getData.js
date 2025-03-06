@@ -9,7 +9,8 @@ export default async function getData(args) {
   } = args;
 
   setImageUrl(input);
-  fetch("https://pure-chamber-68409-b6d4e0cc53bb.herokuapp.com/imageurl", {
+  // TODO Change this Netlify
+  fetch("https://localhost:3000/imageurl", {
     method: "post",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -19,7 +20,8 @@ export default async function getData(args) {
     .then((response) => response.json())
     .then((response) => {
       if (response) {
-        fetch("https://pure-chamber-68409-b6d4e0cc53bb.herokuapp.com/image", {
+        // TODO Change this Netlify
+        fetch("https://localhost:3000/image", {
           method: "put",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
