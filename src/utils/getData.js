@@ -18,7 +18,7 @@ export default async function getData(args) {
     }),
     mode: "cors",
   })
-    .then((response) => response.json())
+    .then(async (response) => await response.json())
     .then((response) => {
       if (response) {
         
@@ -29,7 +29,7 @@ export default async function getData(args) {
             id: user.id,
           }),
         })
-          .then((response) => response.json())
+          .then(async (response) => await response.json())
           .then((response) => {
             setUserEntries(response);
           })

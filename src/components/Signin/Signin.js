@@ -26,7 +26,7 @@ export default function Signin() {
         password: signInPassword,
       }),
     })
-      .then((response) => response.json())
+      .then(async (response) => await response.json())
       .then((user) => {
         if (user.id) {
           setUser(user);

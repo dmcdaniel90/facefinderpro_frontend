@@ -28,7 +28,6 @@ export default function Register() {
       method: "post",
       headers: {
         "Content-Type": "application/json",
-        Accept: "application/json",
       },
       body: JSON.stringify({
         name,
@@ -39,11 +38,10 @@ export default function Register() {
     })
       .then(async (response) => {
         const responseData = await response.json();
-        console.log(responseData);
         if (!response.ok) {
           throw new Error(responseData.message || "Failed to authenticate!");
         }
-        return response.json();
+        console.log(responseData);
       })
       .then((user) => {
         if (user.id) {
