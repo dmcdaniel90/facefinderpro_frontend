@@ -22,7 +22,8 @@ export default function Register() {
 
   const onSubmitSignIn = (e) => {
     e.preventDefault();
-
+    //^ CONSOLE LOGGING THE EMAIL, PASSWORD, AND NAME
+    console.log("Submitting information: ",email, password, name);
     
     fetch("https://facefinderpro-production.up.railway.app/register", {
       method: "post",
@@ -38,6 +39,8 @@ export default function Register() {
     })
       .then(async (response) => {
         const responseData = await response.json();
+        //^ CONSOLE LOGGING THE RESPONSE DATA
+        console.log("Response Data: ", responseData);
         if (!response.ok) {
           throw new Error(responseData.message || "Failed to authenticate!");
         }
