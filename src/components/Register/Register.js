@@ -41,7 +41,7 @@ export default function Register() {
         const responseData = await response.json();
         //^ CONSOLE LOGGING THE RESPONSE DATA
         console.log("Response Data: ", responseData);
-        if (!response.ok) {
+        if (response.status !== 200) {
           throw new Error(responseData.message || "Failed to authenticate!");
         }
         console.log(responseData);
