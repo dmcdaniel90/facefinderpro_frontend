@@ -24,7 +24,7 @@ export default function Register() {
     e.preventDefault();
 
     try {
-      const response = await fetch(process.env.BACKEND_URL + "/register", {
+      const response = await fetch("hello" + "/register", {
         method: "post",
         headers: {
           "Content-Type": "application/json",
