@@ -18,7 +18,7 @@ export default function Signin() {
   const onSubmitSignIn = (e) => {
     e.preventDefault();
     
-    fetch("https://facefinderpro-production.up.railway.app/signin", {
+    fetch(process.env.RAILWAY_PUBLIC_DOMAIN + "/signin", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

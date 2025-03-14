@@ -23,7 +23,7 @@ export default function Register() {
   const onSubmitSignIn = (e) => {
     e.preventDefault();
     
-    fetch("https://facefinderpro-production.up.railway.app/register", {
+    fetch(process.env.RAILWAY_PUBLIC_DOMAIN + "/register", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
