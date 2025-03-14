@@ -18,7 +18,7 @@ export default function Signin() {
   const onSubmitSignIn = (e) => {
     e.preventDefault();
     
-    fetch(import.meta.env.VITE__BACKEND_URL + "/signin", {
+    fetch(import.meta.env.VITE_BACKEND_URL + "/signin", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
