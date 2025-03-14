@@ -45,7 +45,7 @@ export default function Register() {
           setRoute("home");
         } else {
           throw new Error(response.status + " Error: " + response.statusText);
-      }
+        }
       }
     } catch (err) {
       console.log(err);
