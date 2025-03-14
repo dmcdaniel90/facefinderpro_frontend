@@ -23,10 +23,8 @@ export default function Register() {
   const onSubmitSignIn = async (e) => {
     e.preventDefault();
 
-    const testVariable = process.env ? process.env.BACKEND_URL : "hello";
-
     try {
-      const response = await fetch({testVariable} + "/register", {
+      const response = await fetch(`${process.env.BACKEND_URL}/register`, {
         method: "post",
         headers: {
           "Content-Type": "application/json",
