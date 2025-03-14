@@ -37,8 +37,6 @@ export default function Register() {
     })
       .then(async (response) => {
         const responseData = await response.json();
-        //^ CONSOLE LOGGING THE RESPONSE DATA
-        console.log("Fetch complete: ",responseData);
       })
       .then((user) => {
         if (user.id) {
