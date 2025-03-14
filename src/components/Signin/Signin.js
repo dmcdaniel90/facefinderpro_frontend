@@ -18,7 +18,7 @@ export default function Signin() {
   const onSubmitSignIn = (e) => {
     e.preventDefault();
     
-    fetch(process.env.RAILWAY_PUBLIC_DOMAIN + "/signin", {
+    fetch(process.env.BACKEND_URL + "/signin", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

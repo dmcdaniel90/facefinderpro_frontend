@@ -20,32 +20,36 @@ export default function Register() {
     setName(event.target.value);
   };
 
-  const onSubmitSignIn = (e) => {
+  const onSubmitSignIn = async (e) => {
     e.preventDefault();
-    
-    fetch(process.env.RAILWAY_PUBLIC_DOMAIN + "/register", {
-      method: "post",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name,
-        email,
-        password,
-      }),
-      mode: "cors",
-    })
-      .then(async (response) => {
-        const responseData = await response.json();
+
+    try {
+      const response = await fetch(process.env.BACKEND_URL + "/register", {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          password,
+        }),
+        mode: "cors",
       })
-      .then((user) => {
-        if (user.id) {
+
+      if (response.ok) {
+        const user = await response.json();
+        if(user.id) {
           setUser(user);
           isSignedIn(true);
           setRoute("home");
-        }
-      })
-      .catch((err) => console.log("Error: ", err));
+        } else {
+          throw new Error(response.status + " Error: " + response.statusText);
+      }
+      }
+    } catch (err) {
+      console.log(err);
+    }  
   };
 
   return (
@@ -104,3 +108,4 @@ export default function Register() {
     </article>
   );
 }
+
