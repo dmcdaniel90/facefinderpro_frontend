@@ -31,7 +31,7 @@
   },
   "scripts": {
     "dev": "vite --mode development",
-    "start": "vite --mode production",
+    "start": "vite --omit='dev'",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
     "format": "prettier --write 'src/**/*.{js,jsx,ts,tsx,json,css,scss,md}'",
