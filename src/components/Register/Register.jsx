@@ -24,7 +24,7 @@ export default function Register() {
     e.preventDefault();
 
     try {
-      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/register`, {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/register`, {
         method: "post",
         headers: {
           "Content-Type": "application/json",
