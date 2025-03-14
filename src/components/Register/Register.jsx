@@ -23,6 +23,8 @@ export default function Register() {
   const onSubmitSignIn = async (e) => {
     e.preventDefault();
 
+    console.log(import.meta.env.VITE_BACKEND_URL);
+
     try {
       const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/register`, {
         method: "post",
