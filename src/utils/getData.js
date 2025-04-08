@@ -10,7 +10,7 @@ export default async function getData(args) {
 
   setImageUrl(input);
   
-  fetch("https://facefinderpro-production.up.railway.app/imageurl", {
+  fetch(`${import.meta.env.VITE_BACKEND_URL}/imageurl`, {
     method: "post",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -22,7 +22,7 @@ export default async function getData(args) {
     .then((response) => {
       if (response) {
         
-        fetch("https://facefinderpro-production.up.railway.app/image", {
+        fetch(`${import.meta.env.VITE_BACKEND_URL}/image`, {
           method: "put",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({

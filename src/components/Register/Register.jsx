@@ -8,7 +8,7 @@ export default function Register() {
 
   const setUser = useStore((state) => state.setUser);
   const setRoute = useStore((state) => state.setRoute);
-  const isSignedIn = useStore((state) => state.isSignedIn);
+  const setIsSignedIn = useStore((state) => state.setIsSignedIn);
 
   const onEmailChange = (event) => {
     setEmail(event.target.value);
@@ -41,7 +41,7 @@ export default function Register() {
         const user = await response.json();
         if(user.id) {
           setUser(user);
-          isSignedIn(true);
+          setIsSignedIn(true);
           setRoute("home");
         } else {
           throw new Error(response.status + " Error: " + response.statusText);

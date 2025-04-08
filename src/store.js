@@ -3,7 +3,6 @@ import { immer } from "zustand/middleware/immer";
 import { produce } from "immer";
 
 const initialState = {
-  input: "",
   imageUrl: "",
   boundingBoxes: [],
   route: "signin",
@@ -20,13 +19,11 @@ const initialState = {
 export const useStore = create(
   immer((set) => ({
     ...initialState,
-    setInput: (input) => set({ input }),
-    setImageUrl: (imageUrl) => set({ imageUrl }),
     setBoundingBoxes: (boundingBoxes) => set({ boundingBoxes }),
     setRoute: (route) => set({ route }),
     setIsSignedIn: (isSignedIn) => set({ isSignedIn }),
-
     setUser: (user) => set({ user }),
+    setImageUrl: (imageUrl) => set({imageUrl}),
     setUserEntries: ({ entries }) =>
       set(
         produce((state) => {
