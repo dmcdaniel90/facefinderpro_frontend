@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import { useState } from "react";
 import { useStore } from "../../store";
 import { calculateFaceLocations } from "../../utils/calculateFaceLocation";
 import getData from "../../utils/getData";
