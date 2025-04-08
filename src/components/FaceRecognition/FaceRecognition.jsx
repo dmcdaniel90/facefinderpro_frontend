@@ -2,7 +2,7 @@ import { useStore } from "../../store";
 import "./FaceRecognition.css";
 
 const FaceRecognition = () => {
-  const imageURL = useStore((state) => state.imageUrl);
+  const imageUrl = useStore((state) => state.imageUrl);
   const boundingBoxes = useStore((state) => state.boundingBoxes);
 
   const faces = boundingBoxes.map((face, i) => {
@@ -25,7 +25,7 @@ const FaceRecognition = () => {
       <div className="absolute mt2">
         <img
           id="inputImage"
-          src={imageURL}
+          src={imageUrl}
           alt=""
           width="500px"
           height="auto"
